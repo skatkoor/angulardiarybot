@@ -1,0 +1,69 @@
+<div [ngClass]="{ 'w-64': !collapsed, 'w-16': collapsed }" class="bg-white border-r border-gray-200 h-screen transition-all duration-300">
+  <div class="flex items-center justify-between px-4 py-4">
+    <span *ngIf="!collapsed" class="text-lg font-bold">DiaryBot</span>
+    <button (click)="toggleSidebar()" class="text-gray-600 hover:bg-gray-200 rounded-full p-2">
+      <ng-icon [name]="collapsed ? 'heroChevronRightSolid' : 'heroChevronLeftSolid'" class="w-5 h-5"></ng-icon>
+    </button>
+  </div>
+  <nav class="mt-2">
+    <ul>
+      <li class="mb-4">
+        <button
+          routerLink="/diary"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroBookOpenSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">Diary</span>
+        </button>
+      </li>
+      <!-- Repeat for other menu items -->
+      <li class="mb-4">
+        <button
+          routerLink="/notes"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroClipboardDocumentListSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">Notes</span>
+        </button>
+      </li>
+      <li class="mb-4">
+        <button
+          routerLink="/todo"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroClipboardDocumentListSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">To Do</span>
+        </button>
+      </li>
+      <li class="mb-4">
+        <button
+          routerLink="/finance"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroCurrencyDollarSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">Finance</span>
+        </button>
+      </li>
+      <!-- Uncomment if you include the AI Assistant feature
+      <li class="mb-4">
+        <button
+          routerLink="/ai-assistant"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroChatBubbleLeftRightSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">AI Assistant</span>
+        </button>
+      </li>
+      -->
+      <li class="mb-4">
+        <button
+          routerLink="/settings"
+          class="w-full flex items-center gap-3 p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+        >
+          <ng-icon name="heroCog6ToothSolid" class="w-6 h-6"></ng-icon>
+          <span *ngIf="!collapsed" class="text-sm">Settings</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

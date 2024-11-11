@@ -1,0 +1,70 @@
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+  <!-- Week Navigation -->
+  <div class="flex items-center mb-4">
+    <button (click)="previousWeek()" class="text-gray-600 hover:text-gray-800">
+      <ng-icon name="heroChevronLeftSolid" class="w-6 h-6"></ng-icon>
+    </button>
+    <h2 class="text-xl font-bold mx-2">{{ currentDate | date: 'MMMM yyyy' }}</h2>
+    <button (click)="nextWeek()" class="text-gray-600 hover:text-gray-800">
+      <ng-icon name="heroChevronRightSolid" class="w-6 h-6"></ng-icon>
+    </button>
+  </div>
+
+  <!-- Week Days -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="grid grid-cols-7 gap-4">
+      <div
+        *ngFor="let day of weekDates"
+        (click)="selectDate(day)"
+        [ngClass]="{ 'bg-blue-100': isSameDate(day, selectedDate) }"
+        class="relative cursor-pointer p-2 text-center rounded-lg hover:bg-blue-50"
+      >
+        <div class="text-sm">{{ day | date: 'EEE' }}</div>
+        <div class="text-lg">{{ day | date: 'd' }}</div>
+        <!-- Blue dot indicator -->
+        <div
+          *ngIf="hasEntry(day)"
+          class="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entry Form -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center gap-2 mb-4">
+      <h3 class="text-lg font-semibold">{{ selectedDate | date: 'EEEE, MMMM d, yyyy' }}</h3>
+    </div>
+
+    <form (ngSubmit)="saveEntry()" class="space-y-4">
+      <quill-editor
+        [(ngModel)]="selectedEntryContent"
+        name="entryContent"
+        [modules]="quillModules"
+        (onEditorCreated)="onEditorCreated($event)"
+        class="bg-white"
+      ></quill-editor>
+      <div class="flex items-center justify-between">
+        <div class="flex gap-4">
+          <!-- Additional controls can be added here -->
+        </div>
+        <button
+          type="submit"
+          [disabled]="!selectedEntryContent.trim()"
+          class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Save Entry
+        </button>
+      </div>
+    </form>
+
+    <!-- Display Entry or No Entries Message -->
+    <div *ngIf="entriesMap[formatDateKey(selectedDate)] else noEntries" class="mt-6">
+      <h4 class="text-md font-semibold mb-2">Your Entry:</h4>
+      <div [innerHTML]="entriesMap[formatDateKey(selectedDate)]"></div>
+    </div>
+    <ng-template #noEntries>
+      <p class="text-center text-gray-500 py-8">No entries for this date</p>
+    </ng-template>
+  </div>
+</div>

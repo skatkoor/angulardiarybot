@@ -1,0 +1,43 @@
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">{{ currentYear }}</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let month of months" class="bg-white rounded-lg shadow p-4">
+        <h3 class="text-xl font-semibold mb-4 text-center">{{ month.name }}</h3>
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="py-1">Sun</th>
+              <th class="py-1">Mon</th>
+              <th class="py-1">Tue</th>
+              <th class="py-1">Wed</th>
+              <th class="py-1">Thu</th>
+              <th class="py-1">Fri</th>
+              <th class="py-1">Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of month.weeks">
+              <td *ngFor="let day of week" class="text-center py-1">
+                <div
+                  *ngIf="day"
+                  (click)="selectDate(day)"
+                  [ngClass]="{
+                    'bg-blue-100 cursor-pointer rounded-full': hasEntry(day),
+                    'cursor-pointer': !hasEntry(day)
+                  }"
+                  class="w-8 h-8 flex items-center justify-center mx-auto"
+                >
+                  {{ day.getDate() }}
+                </div>
+                <div *ngIf="!day">
+                  <!-- Empty cell for days outside the month -->
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,44 @@
+<!-- src/app/features/notes/components/note-card/note-card.component.html -->
+
+<div class="bg-white rounded-lg shadow p-4 mb-4">
+  <div *ngIf="!isEditing">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text-lg font-semibold">{{ note.title }}</h3>
+      <div class="flex gap-2">
+        <button (click)="editNote()" class="text-gray-600 hover:text-blue-600">
+          <ng-icon name="heroPencilSquareSolid" class="w-5 h-5"></ng-icon>
+        </button>
+        <button (click)="deleteNote()" class="text-gray-600 hover:text-red-600">
+          <ng-icon name="heroTrashSolid" class="w-5 h-5"></ng-icon>
+        </button>
+      </div>
+    </div>
+    <p class="text-gray-700" [innerHTML]="note.content | markdownToHtml"></p> <!-- Optional: Use a pipe to render markdown -->
+    <div class="mt-2">
+      <label for="file-upload-{{note.id}}" class="btn-secondary cursor-pointer">Upload File</label>
+      <input
+        type="file"
+        id="file-upload-{{note.id}}"
+        (change)="uploadFile($event)"
+        style="display: none;"
+      />
+    </div>
+  </div>
+  <div *ngIf="isEditing" class="mt-4">
+    <input
+      type="text"
+      [(ngModel)]="note.title"
+      class="input mb-2"
+      placeholder="Note Title"
+    />
+    <textarea
+      [(ngModel)]="note.content"
+      class="input mb-2"
+      placeholder="Note Content"
+    ></textarea>
+    <div class="flex gap-2">
+      <button (click)="saveNote()" class="btn-primary">Save</button>
+      <button (click)="cancelEdit()" class="btn-secondary">Cancel</button>
+    </div>
+  </div>
+</div>

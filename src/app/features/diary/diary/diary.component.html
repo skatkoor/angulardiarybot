@@ -1,0 +1,27 @@
+<!-- src/app/features/diary/diary/diary.component.html -->
+<div class="max-w-7xl mx-auto p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Diary</h2>
+    <div>
+      <button
+        (click)="view = 'week'"
+        [ngClass]="{'bg-blue-500 text-white': view === 'week', 'bg-gray-100 text-gray-800': view !== 'week'}"
+        class="px-3 py-1 rounded-md hover:bg-blue-600 hover:text-white transition-colors"
+      >
+        Week
+      </button>
+      <button
+        (click)="view = 'year'"
+        [ngClass]="{'bg-blue-500 text-white': view === 'year', 'bg-gray-100 text-gray-800': view !== 'year'}"
+        class="px-3 py-1 rounded-md hover:bg-blue-600 hover:text-white transition-colors"
+      >
+        Year
+      </button>
+    </div>
+  </div>
+
+  <div [ngSwitch]="view">
+    <app-week-calendar *ngSwitchCase="'week'"></app-week-calendar>
+    <app-year-calendar *ngSwitchCase="'year'"></app-year-calendar>
+  </div>
+</div>

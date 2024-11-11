@@ -1,0 +1,38 @@
+<!-- src/app/features/notes/components/notes-dashboard/notes-dashboard.component.html -->
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl font-bold">Notes Dashboard</h2>
+    <div class="flex gap-2">
+      <button (click)="addNote()" class="btn-primary">+ New Note</button>
+      <button (click)="addFlashcard()" class="btn-primary">+ New Flashcard</button>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="mb-4 text-red-500">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="mb-4 text-green-500">
+    {{ successMessage }}
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ng-container *ngFor="let item of notes">
+      <!-- Note Card -->
+      <ng-container *ngIf="item.type === 'note'">
+        <app-note-card
+          [note]="item"
+          (delete)="deleteItem(item.id)"
+        ></app-note-card>
+      </ng-container>
+
+      <!-- Flashcard -->
+      <ng-container *ngIf="item.type === 'flashcard'">
+        <app-flashcard
+          [flashcard]="item"
+          (delete)="deleteItem(item.id)"
+        ></app-flashcard>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

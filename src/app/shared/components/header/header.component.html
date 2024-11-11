@@ -1,0 +1,29 @@
+<header class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4">
+  <div class="flex items-center gap-4">
+    <!-- Diary Heading on the Left -->
+    <h1 class="text-xl font-semibold text-gray-800">Diary</h1>
+  </div>
+  <div class="flex items-center gap-4">
+    <!-- Week and Year Buttons on the Right -->
+    <a
+      routerLink="/diary/week"
+      class="px-3 py-1 rounded-md text-sm font-medium"
+      [ngClass]="{
+        'bg-blue-500 text-white': isActive('/diary/week'),
+        'text-gray-600 hover:bg-gray-200': !isActive('/diary/week')
+      }"
+    >
+      Week
+    </a>
+    <a
+      routerLink="/diary/year"
+      class="ml-2 px-3 py-1 rounded-md text-sm font-medium"
+      [ngClass]="{
+        'bg-blue-500 text-white': isActive('/diary/year'),
+        'text-gray-600 hover:bg-gray-200': !isActive('/diary/year')
+      }"
+    >
+      Year
+    </a>
+  </div>
+</header>
